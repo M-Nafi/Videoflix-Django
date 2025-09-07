@@ -1,0 +1,27 @@
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "core.settings"
+python_files = ["test_*.py", "*_test.py", "tests.py"]
+addopts = [
+    "--reuse-db",                    
+    "--tb=short",                    
+]
+
+markers = [
+    "unit: Unit Tests",
+    "integration: Integration Tests", 
+    "slow: Slow running tests",
+]
+
+[tool.coverage.run]
+source = ["."]
+omit = [
+    "*/migrations/*",
+    "*/venv/*",
+    "*/env/*", 
+    "manage.py",
+    "*/settings/*",
+]
+
+[tool.coverage.report]
+show_missing = true
+fail_under = 80

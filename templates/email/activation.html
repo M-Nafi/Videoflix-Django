@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Confirm your email address</title>
+</head>
+<body style="font-family: sans-serif; color: #535456; font-size: 16px">
+    <p style="text-align: center">
+        <img src="cid:videoflix_logo" alt="Videoflix Logo" style="width: 250px; height: 40px;" />
+    </p>
+    <p>Dear {{ user_email }},</p>
+    <p>Thank you for registering with <span style="color: #2e3edf;">Videoflix</span>. To complete your registration and verify your email address, please click the link below:</p>
+    <p style="margin: 40px 0px;">
+        <a href="{{ link|safe }}" style="font-size:18px; font-weight:700; background: #2e3edf; color: #fff; padding: 12px 24px; border-radius: 40px; text-decoration: none">
+            Activate account
+        </a>
+    </p>
+    <p>If you did not create an account with us, please disregard this email.</p>
+    <p>Best regards,<br /><br />Your Videoflix Team</p>
+</body>
+</html>
