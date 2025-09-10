@@ -62,17 +62,33 @@ def convert_video_to_hls(input_path: str, output_dir: str, resolution: int) -> s
 
 def generate_thumbnail(input_path: str, output_path: str) -> None:
     """
-    Generate a thumbnail image from the first second of a video.
+    Generate a thumbnail image for the given video file.
+
+    The thumbnail will be resized to 272x154 pixels and saved at the specified output path.
 
     Args:
-        input_path (str): Path to the video file.
+        input_path (str): Path to the source video file.
         output_path (str): Path where the thumbnail image will be saved.
     """
-    clip = VideoFileClip(input_path)
-    frame = clip.get_frame(1)
-    image = Image.fromarray(frame)
-    resized_image = image.resize((272, 154))
-    resized_image.save(output_path)
+    command = [
+        "ffmpeg",
+        "-i", input_path,
+        "-ss", "00:00:01",  
+        "-vframes", "1",     
+        "-vf", "scale=272:154",  
+        "-update", "1",      
+        "-y", 
+        output_path
+    ]
+    
+    try:
+        result = subprocess.run(command, check=True, capture_output=True, text=True)
+        if not os.path.exists(output_path):
+            raise Exception(f"Thumbnail was not created at {output_path}")
+        print(f"DEBUG: Thumbnail created successfully at {output_path}")
+    except subprocess.CalledProcessError as e:
+        print(f"ERROR: FFmpeg failed to create thumbnail: {e.stderr}")
+        raise
 
 
 def get_hls_manifest_by_resolution(video, resolution: str):
