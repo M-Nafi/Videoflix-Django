@@ -119,3 +119,12 @@ GitHub.sublime-settings
 !.vscode/launch.json 
 !.vscode/extensions.json 
 .history
+
+# Added by cleanup
+desktop.ini
+__pycache__/
+venv/
+.venv/
+dump.rdb
+.angular/
+node_modules/
